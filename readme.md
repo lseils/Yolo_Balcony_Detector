@@ -104,24 +104,24 @@ Results: 77.1% Precision, 63.7% Recall
 
 67.9% mAP50 - Mean Average Precision at 50% IoU (How good the model is at finding the balcony and putting a box roughly in the right spot)
 
-(39.7%) mAP50-95 (How precise and tight the bounding boxes are. Because it demands near-perfect alignment, this number is always significantly lower than mAP50)
+(39.7%) mAP50-95 (How precise and tight the bounding boxes are. Because it demands near-perfect alignment, this number is always significantly lower than mAP50)<br/> 
 
 ![Result Functions](documentation/figures/results.png)
-*Loss Graphs showing the model learning from it's mistakes and Metrics Graphs going up and starting leveling off showing training for more epochs may not help much more*
+*Loss Graphs showing the model learning from it's mistakes and Metrics Graphs going up and starting leveling off showing training for more epochs may not help much more*<br/>
 
 ![Precision & Recall Curve](documentation/figures/BoxPR_curve.png)
-*Tradeoff between accuracy and being thorough*
+*Tradeoff between accuracy and being thorough*<br/>
 
 ![Confusion Matrix](documentation/figures/confusion_matrix.png)
-*Number of true positives, false alarms, and missed opportunities*
+*Number of true positives, false alarms, and missed opportunities*<br/>
 
 ![Exampe Validation Batch](documentation/figures/val_batch0_pred.jpg)
-*Example of detection with bounding boxes and confidence levels*
+*Example of detection with bounding boxes and confidence levels*<br/>
 
 
 ## Discussion
 
-The results of the model training show that the model leans twords being cautios. When the model makes a prediction, it is usually right but it is currently missing about a third of the objects in the dataset. Missed objects also might be due to being too small or obsured. This shows more epochs (a complete pass of the dataset through an neural network) or better training set is required. val losses are very jagged in the graph suggesting the validation set might be too small or the learning rate is too aggressive for the first pass of training. Another important note is that the results graphs stop at 50 epoch, not 200 like the training was originally set to. Training was actually stopped at 50 because YOLOv8 by default stops if there is no improvment when the learning rate shrinks down to almost zero. More epochs alone will not help this. In the training images, a lot of Goolge street view UI is still included in the images. This may also muddy up the model detection ability. 
+The results of the model training show that the model leans twords being cautious. When the model makes a prediction, it is usually right but it is currently missing about a third of the objects in the dataset. Missed objects also might be due to being too small or obsured. This shows more epochs (a complete pass of the dataset through an neural network) or better training set is required. val losses are very jagged in the graph suggesting the validation set might be too small or the learning rate is too aggressive for the first pass of training. Another important note is that the results graphs stop at 50 epoch, not 200 like the training was originally set to. Training was actually stopped at 50 because YOLOv8 by default stops if there is no improvment when the learning rate shrinks down to almost zero. More epochs alone will not help this. In the training images, a lot of Goolge street view UI is still included in the images. This may also muddy up the model detection ability. 
 
 With the given results, starting from scratch and retraining the model would yield greater improvements. There is a lot to learn from these results but much of the issues comes down to the lack of precision in the labeling of the balconies. This meaning, more precise outlines of the balconies as well as including every balcony in the picure even if its far way or obscured. Raising the confidence level required in the detect.py file will filter out weak predictions. Images without balconies should be included. Finally, using more images will help with a lot of the issues. 
 
