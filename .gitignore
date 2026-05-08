@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+
+# YOLO / ML outputs
+runs/
+*.pt
+*.onnx
+*.engine
+*.weights
+
+# Datasets (never commit)
+images/
+labels/
+annotations_json/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+
+
+# Personal Notes
+Notes
+
