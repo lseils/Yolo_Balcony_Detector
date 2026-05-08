@@ -34,11 +34,11 @@ To see BFA-YOLO: https://github.com/CVEO/BFA-YOLO
 
 To use to detect balconies in your own image follow these steps:
 
-  1. Put your images into input folder
+1. Put your images into input folder
 
-  2. Ensure correct directories in detection.py
+2. Ensure correct directories in detection.py
 
-    ```python
+  ```python
     import warnings
     warnings.filterwarnings('ignore')
     from ultralytics import YOLO
@@ -55,41 +55,41 @@ To use to detect balconies in your own image follow these steps:
                       # visualize=True # visualize model features maps
                     )
     
-    ```
+  ```
 
-  3. Run detection model
-    To Detect: *(do in venv)*
-    ```
+3. Run detection model
+  To Detect: *(do in venv)*
+  ```
     python detect.py
-    ```
+  ```
   
-  4. Generated images in detections folder
+4. Generated images in detections folder
 
 
 ## Methods 
 
 1. Image Collection
 
-  Since the use of this model is for a research project uses google street view images, it was important that the data was at the same type of quality. So the images for training were taken from going around on google maps, finding balconies on buildings, and taking screenshots. In this process, multiple shots of each building were taken so that there would be different FOV, Angles, Lighting, Scale, and portions of the building. Including more variables helps the model to be more robust. 400 images were collected
+Since the use of this model is for a research project uses google street view images, it was important that the data was at the same type of quality. So the images for training were taken from going around on google maps, finding balconies on buildings, and taking screenshots. In this process, multiple shots of each building were taken so that there would be different FOV, Angles, Lighting, Scale, and portions of the building. Including more variables helps the model to be more robust. 400 images were collected
     
 
 2. AnyLabeling
 
-  AnyLabeling was used to label all of the photos. Polygons were drawn around each balcony. AnyLabeling then output JSON files of the labeled data.
+AnyLabeling was used to label all of the photos. Polygons were drawn around each balcony. AnyLabeling then output JSON files of the labeled data.
 
-  To see Label Anything: https://anylabeling.nrl.ai/
+To see Label Anything: https://anylabeling.nrl.ai/
 
 
 3. Data Conversion
 
-  AnyLabeling outputs JSON but traing data requires a specific file type. Bounding boxes were generated around the polygons within the JSON files, then output as txt files which is the correct data type that the model needs to be trained. Labeled images were then put into the different steps of training: 70% train / 20% val / 10% test split
+AnyLabeling outputs JSON but traing data requires a specific file type. Bounding boxes were generated around the polygons within the JSON files, then output as txt files which is the correct data type that the model needs to be trained. Labeled images were then put into the different steps of training: 70% train / 20% val / 10% test split
 
-  To see repo that did this conversion: https://github.com/lseils/AnythingLabeling
+To see repo that did this conversion: https://github.com/lseils/AnythingLabeling
 
 
 4. Actual Training
 
-  Training was conducted using the Ultralytics YOLOv8 framework with the BFA-YOLO architecture defined in yolov8-BFA-YOLO.yaml. The model was trained for a maximum of 200 epochs with an image size of 640px, a batch size of 16, and an initial learning rate of 0.001 using SGD optimization. Training was run on a GPU. YOLOv8's built-in early stopping halted training at epoch 50 when the learning rate decayed to near zero with no further improvement detected. The best performing checkpoint was automatically saved as best.pt based on validation mAP50.
+Training was conducted using the Ultralytics YOLOv8 framework with the BFA-YOLO architecture defined in yolov8-BFA-YOLO.yaml. The model was trained for a maximum of 200 epochs with an image size of 640px, a batch size of 16, and an initial learning rate of 0.001 using SGD optimization. Training was run on a GPU. YOLOv8's built-in early stopping halted training at epoch 50 when the learning rate decayed to near zero with no further improvement detected. The best performing checkpoint was automatically saved as best.pt based on validation mAP50.
   
 
 
