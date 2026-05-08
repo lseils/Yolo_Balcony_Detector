@@ -1,33 +1,84 @@
-# BFA-YOLO: A balanced multiscale object detection network for building façade attachments detection
-[PDF](https://arxiv.org/pdf/2409.04025)
+# YOLO Balcony Detector
 
 
-The detection of façade elements on buildings, such as doors, windows, balconies, air conditioning units, billboards, and glass curtain walls, is a critical step in automating the creation of Building Information Modeling (BIM). Yet, this field faces significant challenges, including the uneven distribution of façade elements, the presence of small objects, and substantial background noise, which hamper detection accuracy. To address these issues, we develop the BFA-YOLO model and the BFA-3D dataset in this study. The BFA-YOLO model is an advanced architecture designed specifically for analyzing multi-view images of façade attachments. It integrates three novel components: the Feature Balanced Spindle Module (FBSM) that tackles the issue of uneven object distribution; the Target Dynamic Alignment Task Detection Head (TDATH) that enhances the detection of small objects; and the Position Memory Enhanced Self-Attention Mechanism (PMESA), aimed at reducing the impact of background noise. These elements collectively enable BFA-YOLO to effectively address each challenge, thereby improving model robustness and detection precision. The BFA-3D dataset, offers multi-view images with precise annotations across a wide range of façade attachment categories. This dataset is developed to address the limitations present in existing façade detection datasets, which often feature a single perspective and insufficient category coverage. Through comparative analysis, BFA-YOLO demonstrated improvements of 1.8\% and 2.9\% in mAP50 on the BFA-3D dataset and the public Façade-WHU dataset, respectively, when compared to the baseline YOLOv8 model. These results highlight the superior performance of BFA-YOLO in façade element detection and the advancement of intelligent BIM technologies.
+![Example](images/Framework.png)
 
 
-## Model Structure
-![Structure Figure](figure/Fig_BFA-YOLO_Net.png)
-
-## Data Preparation
-[Download](https://pan.baidu.com/s/1BXiSJ4Ud_IcQ5Z2sgEYcBw?pwd=rysy)
 
 
-## Training
+Lydia Seils
+M.S. Architecture (Computational Design) - Georgia Tech 
+www.linkedin.com/in/lydia-seils
+Lydiamseils@gmail.com
+https://lseils.github.io/
+
+
+--------
+## Overview
+
+This Repository includes a Detection Model for Balconies specifically
+
+This is a YOLOv8 trained model with BFA-YOLO architecture
+
+
+
+## About
+
+This model was trained for the purpose of being used in other research: A Computational Framework for Assessing Balcony Plug-and-Play Solar Photovoltaic Potential at the Neighborhood Scale
+
+To see this research: https://github.com/SustainableUrbanSystemsLab/ARCH-8833-Lydia
+
+
+This is a YOLOv8 trained model with BFA-YOLO architecure. BFA-YOLO is a trained model specifically for detection of facade elements. Although their is a balcony class, the dataset and other dependencies are not made available requiring the need for training for balconies with available data that would work for the research. The reason for training YOLOv8 is for its benefits, like it's massive ecosystem, active maintenance, simple API, and easy export options. The value in training the model with BFA-YOLO architecture is it's FBSM (Feature Balanced Spindle Module), TDATH (Target Dynamic Alignment Task Detection Head), and PMESA (Position Memory Enhanced Self-Attention). FBSM handles the fact that balconies vary widly in size across and image. TDATH catches balconies even when part of them is hidden or cut off. PMESA helps the model remember context and position avoiding false positives since non balcony railings can look just like balcony railings. 
+
+To see BFA-YOLO: https://github.com/CVEO/BFA-YOLO
+
+
+## Methods 
+
+1. Image Collection
+
+  Since the use of this model is for a research project uses google street view images, it was important that the data was at the same type of quality. So the images for training were taken from going around on google maps, finding balconies on buildings, and taking screenshots. In this process, multiple shots of each building were taken so that there would be different FOV, Angles, Lighting, Scale, and portions of the building. Including more variables helps the model to be more robust. 400 images were collected
+    
+
+2. AnyLabeling
+
+  AnyLabeling was used to label all of the photos. Polygons were drawn around each balcony. AnyLabeling then output JSON files of the labeled data.
+
+  To see Label Anything: https://anylabeling.nrl.ai/
+
+
+3. Data Conversion
+
+  AnyLabeling outputs JSON but traing data requires a specific file type. Bounding boxes were generated around the polygons within the JSON files, then output as txt files which is the correct data type that the model needs to be trained.
+
+  To see repo that did this conversion: https://github.com/lseils/AnythingLabeling
+
+
+4. Actual Training
+
+
+## Usage
+
+
+
+
+To Detect: *details*
 ```
-python train.py
+commands
 ```
 
 
-## Publication
-If you want to use this work, please consider citing the following paper.
-```
-@article{chen2025bfa,
-  title={BFA-YOLO: A balanced multiscale object detection network for building fa{\c{c}}ade elements detection},
-  author={Chen, Yangguang and Wang, Tong and Chen, Guanzhou and Zhu, Kun and Tan, Xiaoliang and Wang, Jiaqi and Guo, Wenchao and Wang, Qing and Luo, Xiaolong and Zhang, Xiaodong},
-  journal={Advanced Engineering Informatics},
-  volume={65},
-  pages={103289},
-  year={2025},
-  publisher={Elsevier}
-}
-```
+## Results
+
+
+
+## Discussion
+
+
+
+## References
+
+
+
+
