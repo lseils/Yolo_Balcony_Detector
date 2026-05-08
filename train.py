@@ -5,7 +5,7 @@ from ultralytics import YOLO
 
 
 if __name__ == '__main__':
-    model = YOLO('yolov8-BFA-YOLO.yaml', task='detect')
+    model = YOLO('yolov8-YOLO_Balcony_Detector.yaml', task='detect')
 
     
     model.train(data='data.yaml',
@@ -18,6 +18,6 @@ if __name__ == '__main__':
                 device='gpu',
                 lr = 0.001,
                 optimizer='SGD',
-                project='BFA-YOLO/train',
+                project='YOLO_Balcony_Detector/train',
                 name='exp',
                 )
